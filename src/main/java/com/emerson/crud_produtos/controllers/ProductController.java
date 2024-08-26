@@ -3,6 +3,7 @@ package com.emerson.crud_produtos.controllers;
 import com.emerson.crud_produtos.domain.product.Product;
 import com.emerson.crud_produtos.domain.product.ProductRepository;
 import com.emerson.crud_produtos.domain.product.RequestProduct;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public class ProductController {
             product.setPrice_in_cents(data.price_in_cents());
             return ResponseEntity.ok(product);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException();
         }
     }
 
@@ -58,7 +59,7 @@ public class ProductController {
             product.setActive(false);
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException();
         }
     }
 
